@@ -1,0 +1,103 @@
+<template name="device">
+  <form class="form-left" id="access-token-form">
+    <div class="form-group">
+      <label for="access-token-input">Access token</label>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="input-group">
+            <input type="text" class="form-control" name="accessToken" id="access-token-input" placeholder="Enter access token" value="{{accessToken}}">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" id="verify-access-token">Verify!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-xs-height">
+        <div id="div-access-token-alert" class="alert alert-danger alert-sm hidden" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="alert-text"></span>
+        </div>
+      </div>
+    </div>
+    <hr class="form-divider">
+    <div class="form-group">
+      <label for="select-devices">Device</label>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="input-group">
+            <select class="form-control" name="selectDevices" id="select-devices" disabled>
+              <option value="" disabled>Select the device</option>
+              {{#each devices}}
+                <option value="{{id}}" {{isDeviceSelected}}>{{name}}</option>
+              {{/each}}
+            </select>
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" id="button-check-connection" {{isButtonCheckDeviceDisabled}}>Check connection</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row device-info-spinner hidden">
+    <div class="col-xs-12 col-md-6">
+      <i class="fa fa-spinner fa-spin fa-3x"></i>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-xs-height">
+      <div id="div-device-info-alert" class="alert alert-danger alert-sm hidden" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="alert-text"></span>
+      </div>
+    </div>
+  </div>
+  <div class="div-device-info hidden">
+    <div class="row">
+      <div class="col-xs-4 col-md-2 bold">
+        Status:
+      </div>
+      <div class="col-xs-8 col-md-10" id="div-device-info-status">
+        <span class="label label-success">Online</span>
+        <span class="label label-danger">Offline</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-md-2 bold">
+        Device-ID:
+      </div>
+      <div class="col-xs-8 col-md-10" id="div-device-info-id">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-md-2 bold">
+        Name:
+      </div>
+      <div class="col-xs-8 col-md-10" id="div-device-info-name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-md-2 bold">
+        Last heard:
+      </div>
+      <div class="col-xs-8 col-md-10" id="div-device-info-last-heard">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-md-2 bold">
+        Variables:
+      </div>
+      <div class="col-xs-8 col-md-10" id="div-device-info-variables">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-md-2 bold">
+        Functions:
+      </div>
+      <div class="col-xs-8 col-md-10" id="div-device-info-functions">
+      </div>
+    </div>
+  </div>
+</template>

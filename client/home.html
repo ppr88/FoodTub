@@ -1,6 +1,14 @@
 <template name="home">
   <div class="container">
-    <h1>Bootstrap starter template</h1>
-    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-8 align-right">
+        <span class="align-bottom">Status:</span>
+      </div>
+      <div class="col-xs-2 align-left" id="div-device-status">
+        <span class="label label-default">?</span>
+        <span class="label label-success hidden">Online</span>
+        <span class="label label-danger hidden">Offline</span>
+      </div>
+    </div>
   </div>
 </template>

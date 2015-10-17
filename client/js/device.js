@@ -1,6 +1,20 @@
-Session.set("deviceList", null);
 Session.set("device", null);
+Session.set("deviceList", null);
 Session.set("accessToken", null);
+
+getDevice = function getDevice() {
+  if (Session.get("device") === null) {
+    Session.set("device", Devices.findOne());
+  }
+  return Session.get("device");
+}
+
+getAccessToken = function getAccessToken() {
+  if (Session.get("accessToken") === null) {
+    Session.set("accessToken", AccessToken.findOne().accessToken);
+  }
+  return Session.get("accessToken");
+}
 
 if (Meteor.isClient) {
   Template.device.events({
@@ -14,7 +28,7 @@ if (Meteor.isClient) {
     },
 
     "click #button-check-connection": function (event, template) {
-      checkDeviceConnection(getDevice().id);
+      checkDeviceConnectionUI(getDevice().id);
     },
 
     "change #select-devices": function (event, template) {
@@ -51,20 +65,6 @@ if (Meteor.isClient) {
   })
 }
 
-function getAccessToken() {
-  if (Session.get("accessToken") === null) {
-    Session.set("accessToken", AccessToken.findOne().accessToken);
-  }
-  return Session.get("accessToken");
-}
-
-function getDevice() {
-  if (Session.get("device") === null) {
-    Session.set("device", Devices.findOne());
-  }
-  return Session.get("device");
-}
-
 function setDeviceById(deviceId) {
   var deviceList = Session.get("deviceList");
 
@@ -79,15 +79,12 @@ function setDeviceById(deviceId) {
 }
 
 /** Event handlers **/
-function checkDeviceConnection(deviceId) {
+function checkDeviceConnectionUI(deviceId) {
   $(".div-device-info").addClass('hidden');
   $(".device-info-spinner").removeClass("hidden");
 
   //get device details from particle.io API
-  var options = {
-    headers: {Authorization: "Bearer " + getAccessToken()}
-  };
-  HTTP.get("https://api.particle.io/v1/devices/" + deviceId, options, checkDeviceConnectionCb);
+  checkDeviceConnection(deviceId, checkDeviceConnectionCb);
 }
 
 function verifyAccessToken(accessTokenInput) {

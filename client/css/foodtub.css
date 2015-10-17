@@ -7,8 +7,12 @@ body {
   text-align: center;
 }
 
-.form-left {
+.align-left {
   text-align: left;
+}
+
+.align-right {
+  text-align: right;
 }
 
 .alert-sm {
